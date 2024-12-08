@@ -1,0 +1,122 @@
+<p>Ensuring that an LLM solution is developed according to RAI principles requires the complete AI lifecycle to be covered.</p>
+<ol>
+<li><a href="#evaluation">Metrics &amp; Evaluation</a></li>
+<li><a href="#bias">Bias</a></li>
+<li><a href="#transparency">Transparency</a></li>
+<li><a href="#counterfactual">Counterfactual</a></li>
+<li><a href="#robustness">Robustness</a><ul>
+<li><a href="#hallucinations">Hallucinations</a></li>
+</ul>
+</li>
+<li><a href="#security">Security</a></li>
+</ol>
+<h1 id="metrics-evaluation-a-id-evaluation-a-">Metrics &amp; Evaluation <a id="evaluation"></a></h1>
+<ul>
+<li><a href="https://paperswithcode.com/dataset/mmlu">MMLU</a>. Measuring Massive Multitask Language Understanding (MMLU) is a benchmark for evaluating the capabilities of language models. It consists of about 16,000 multiple-choice questions spanning 57 academic subjects including mathematics, philosophy, law, and medicine. It is one of the most commonly used benchmarks for comparing the capabilities of large language models.
+The MMLU was released by Dan Hendrycks and a team of researchers in 2020 and was designed to be more challenging than then-existing benchmarks such as GLUE on which new language models were achieving better-than-human accuracy. At the time of the MMLU&#39;s release, most existing language models performed around the level of random chance (25%), with the best performing GPT-3 model achieving 43.9% accuracy. The developers of the MMLU estimate that human domain-experts achieve around 89.8% accuracy. As of 2024, some of the most powerful language models, such as Claude 3 and GPT-4, were reported to achieve scores in the mid-80s.
+<a href="https://arxiv.org/abs/2009.03300">The paper can be found here.</a></li>
+<li><a href="https://crfm.stanford.edu/helm/lite/latest/#/leaderboard">HELM</a>. HELM is a framework for evaluating foundation models. Our leaderboard shows how the various models (with particular adaptation procedures) perform across different groups of scenarios and different metrics.</li>
+<li><a href="https://arxiv.org/pdf/2407.12772">LMMs-Eval: Reality Check on the Evaluation of Large Multimodal Models</a>. The advances of large foundation models necessitate wide-coverage, low-cost, and zero-contamination benchmarks. Despite continuous exploration of language model evaluations, comprehensive studies on the evaluation of Large Multi-modal Models (LMMs) remain limited. In this work, we introduce LMMS-EVAL, a unified and standardized multimodal benchmark framework with over 50 tasks and more than 10 models to promote transparent and reproducible evaluations.</li>
+</ul>
+<h1 id="bias-a-name-bias-a-">Bias <a name="bias"></a></h1>
+<h3 id="definition">Definition</h3>
+<p>As highlighted by (Blodgett et al., 2020), a common challenge in the technical literature is the lack of clarity and consistency in defining bias. Typically, discussions around fairness and bias in LLMs revolve around social groups identified by protected attributes. In this framework, <strong>fairness</strong> is viewed through two lenses:</p>
+<ul>
+<li><strong>group fairness</strong>, i.e. equitable treatment of groups differing only in their protected attributes; </li>
+<li><strong>individual fairness</strong>, i.e. treating similar individuals in a comparable manner.</li>
+</ul>
+<p><strong>Bias</strong> is often defined as deviations from these fairness principles, manifesting in ways that disproportionately and negatively affect certain groups or individuals based on their protected attributes. In NLP, commonly encountered social biases manifest in two primary forms:</p>
+<ul>
+<li><strong>Representational harms</strong> refer to the reinforcement of detrimental stereotypes or negative perceptions about certain social groups. </li>
+<li><p><strong>Allocational harms</strong>, by contrast, entail the unequal distribution of resources or opportunities among different social groups, leading to disparities in benefits and advantages (Gallegos et al., 2023).</p>
+<h3 id="sources-of-bias">Sources of bias</h3>
+<p>Several factors contribute to the emergence of bias in LLMs:</p>
+</li>
+<li>disbalance in the training data, where certain groups or perspectives are underrepresented or misrepresented.</li>
+<li>presence of stereotypes and prejudices in the sources from which the training data is collected. </li>
+<li>the design choices and biases of the researchers and developers involved in creating and fine-tuning LLMs can also influence the presence of bias in the models. </li>
+</ul>
+<h3 id="bias-detection-bias-metrics">Bias detection &amp; bias metrics</h3>
+<p>In the specific context of Natural Language Processing (NLP), various tailored metrics have been developed. These metrics include:</p>
+<ul>
+<li>Analysis of distances in word or sentence embeddings, e.g. WEAT (Caliskan et al., 2017) and SEAT (May et al., 2019). CEAT (Guo and Caliskan, 2021) also covers intersectional bias.</li>
+<li>Evaluation of prediction probabilities, especially when altering protected attributes in tasks like masked token prediction, e.g. DisCo (Webster et al., 2020).</li>
+<li>Examination of text generation system outputs, including LLMs. This involves methods like measuring the distribution of generated co-occurrences, assessing classification predictions made by generative models for different social groups, or comparing outputs against a predefined lexicon of words along with their associated bias scores, e.g. HONEST (Nozza et al., 2021).
+These metrics each capture distinct facets of fairness, underscoring the fact that there is no universally applicable solution. Importantly, they all hinge on specific definitions and often require illustrative data examples to effectively quantify the biases they aim to measure.</li>
+</ul>
+<p>To facilitate bias evaluation, a number of datasets have been developed. These are usually focused on known biases such as those related to gender, race, ethnic background, etc., and are defined on specific NLP tasks, e.g. Winograd schemas, Coreference Resolution, or Question Answering. Potentially biased samples are hand-labeled and can be used to test systems.</p>
+<h4 id="unanticipated-bias-detection-ubd-">Unanticipated Bias Detection (UBD)</h4>
+<p>In current research on Large Language Models (LLMs), a significant gap exists: the detection of biases in areas where they are not typically expected. Current studies often focus on well-known biases that have been highlighted due to their clear impact on various tasks. However, this approach overlooks a range of subtle biases that are not immediately obvious, especially in applications that don’t directly involve fairness issues but still process sensitive attributes.
+The challenge is compounded by the subjective nature of fairness and the changing definitions of bias over time. What is considered biased in one context may not be seen the same way in another. This evolving understanding of fairness necessitates research not just on known biases, but also on developing systems that can identify and adapt to emerging biases.</p>
+<h3 id="bias-mitigation">Bias mitigation</h3>
+<p>A significant portion of current research is dedicated to mitigating biases after their identification in data or models. This mitigation can occur at three key stages in the model’s lifecycle: pre-processing, in-processing, and post-processing.</p>
+<ul>
+<li><strong>Pre-processing</strong>: This stage involves addressing bias in the training data before the actual model training begins. The process typically starts with identifying biases within the training dataset. Once these biases are recognized, the data can be modified – for instance, through re-labeling or perturbing – to minimize these biases. Techniques such as re-sampling are also employed to enhance the representation of unbiased data points. Additionally, utilizing data representations that are less prone to bias, or directly de-biasing these representations, are common strategies at this stage.</li>
+<li><strong>In-processing</strong>: Most research efforts focus on mitigating bias during the model’s training phase. This can be achieved by incorporating regularization methods or constraints within the model to prevent the learning of biased relationships. Adversarial learning is another approach, where an auxiliary model is trained to predict protected attributes from the main model’s internal representations, and a min-max strategy is used between the two models. This ideally results in the main model developing representations that do not reflect biases. Other in-processing techniques include training compositional models tailored for each protected group or creating an ensemble of models trained on different data subsets. Adjustments to the learning process itself, such as integrating fairness measures into the hyperparameter optimization process, are also part of this approach.</li>
+<li><p><strong>Post-processing</strong>: In this phase, mitigation efforts focus on models that have already been trained. This involves a detailed analysis of the biases present and their manifestation in the interaction between the model’s inputs and outputs. The mitigation might involve adjusting the inputs and outputs to counteract biases, such as replacing certain elements with equivalents from non-protected groups, or modifying the model’s weights directly. However, the effectiveness of these techniques diminishes as the complexity of the models and their applications increase.</p>
+<h3 id="bias-references">Bias References</h3>
+<ul>
+<li><a href="https://arxiv.org/html/2404.02650v1#abstract">Towards detecting unanticipated bias in Large Language Models</a> [ArXiv]</li>
+</ul>
+</li>
+</ul>
+<h3 id="bias-tools">Bias Tools</h3>
+<ul>
+<li>Bias measuring with <a href="https://docs.konko.ai/docs/llm-bias-detection">konko</a>. It has code. It measures three metrics, Toxicity, Regard and HONEST score. </li>
+<li><a href="https://github.com/MilaNLProc/honest">HONEST: Measuring Hurtful Sentence Completion in Language Models</a>.HONEST is a score to measure hurtful sentence completions in language models. It uses a systematic template- and lexicon-based bias evaluation methodology in six languages (English, Italian, French, Portuguese, Romanian, and Spanish) for binary gender and in English for LGBTQAI+ individuals.</li>
+<li><a href="https://huggingface.co/valurank/distilroberta-bias">DistilROBERTA</a> to classifiy text as &quot;neutral&quot; or &quot;biased&quot;.</li>
+<li><a href="https://docs.confident-ai.com/docs/metrics-bias">DeepEval</a>. The bias metric determines whether your LLM output contains gender, racial, or political bias. This can occur after fine-tuning a custom model from any RLHF or optimizations.</li>
+<li><a href="https://docs.responsibly.ai/index.html">Responsibly</a>. The primary goal is to be one-shop-stop for auditing bias and fairness of machine learning systems, and the secondary one is to mitigate bias and adjust fairness through algorithmic interventions. Besides, there is a particular focus on NLP models.</li>
+</ul>
+<h1 id="transparency-a-name-transparency-a-">Transparency <a name="transparency"></a></h1>
+<h3 id="transparency-tools">Transparency Tools</h3>
+<ul>
+<li>FMTI is the Foundation Model Transparency Index. A comprehensive assessment of the transparency of foundation model developers.
+Sources: <a href="https://hai.stanford.edu/news/introducing-foundation-model-transparency-index">Introducing The Foundation Model Transparency Index</a> / <a href="https://crfm.stanford.edu/fmti/May-2024/index.html">The Foundation Model Transparency Index</a></li>
+</ul>
+<h2 id="counterfactual-a-name-counterfactual-a-">Counterfactual <a name="counterfactual"></a></h2>
+<ul>
+<li><a href="https://towardsdatascience.com/counterfactuals-in-language-ai-956673049b64">Counterfactuals in Language AI</a></li>
+</ul>
+<h2 id="robustness-a-name-robustness-a-">Robustness <a name="robustness"></a></h2>
+<p>LLM may have multiple point of failures, especially on the consistency side:</p>
+<ul>
+<li><a href="#hallucinations">Hallucinations</a>. A hallucination refers to an LLM’s output that does not correlate with real-world facts.</li>
+<li>Reasoning. LLMs can struggle with tasks that require deep understanding of context, which is where human experts excel. </li>
+<li><a href="#generation_quality">Generation Quality</a>. Quality of the text generated. It&#39;s important to ensure ethical responsability (e.g. an LLM should never encourage illegal activity), privacy and safety (e.g. LLM should never mistakenly reveal personal information that endangers someone) and coherence (e.g.  LLM should avoid grammatical errors and use a vocabulary appropriate to its intended audience.)</li>
+<li>Model Mechanics. The importance of testing an LLM’s mechanics lies in making sure it is adaptable, versatile, and broadly applicable. Whether it’s answering questions, translating languages, or even coding, the model should seamlessly transition between different applications (unless it serves one specific application). Some examples of these mechanics are: cost-effectiveness, consistency, and personalization.</li>
+</ul>
+<h3 id="hallucinations-a-name-hallucinations-a-">Hallucinations <a name="hallucinations"></a></h3>
+<ul>
+<li><a href="https://towardsdatascience.com/can-we-stop-llms-from-hallucinating-17c4ebd652c6">Can We Stop LLMs from Hallucinating?</a></li>
+<li><a href="https://blog.normalcomputing.ai/posts/2023-07-27-regex-guided-generation/regex-guided-generation.html?utm_source=substack&amp;utm_medium=email">Eliminating hallucinations (fast!) in Large Language Models with Finite State Machines</a></li>
+<li><a href="https://github.com/vectara/hallucination-leaderboard?utm_source=substack&amp;utm_medium=email">Hallucination Leaderboard</a></li>
+<li><a href="https://www.rungalileo.io/hallucinationindex">Hallucination Index</a>. Our new Index evaluates how well 22 of the leading models adhere to given context, helping developers make informed decisions about balancing price and performance. We conducted rigorous testing of top LLMs with input ranging from 1,000 to 100,000 tokens to answer the question of how well they perform across short, medium, and long context lengths.</li>
+</ul>
+<h3 id="generation-quality-a-name-generation_quality-a-">Generation quality <a name="generation_quality"></a></h3>
+<ul>
+<li>Toxic content: LLMs are trained on a large corpus of text from the internet, which has plenty of hateful, violent, or explicit content. As a result, LLMs are well capable of generating such content. Common mitigation involves adding extra RAI instruction to the prompt as behavioral guardrails.</li>
+<li>Incorrect facts: LLM hallucination is when the output text looks acceptable but is factually incorrect. For example, it can recommend products that don&#39;t exist, leading to user dissatisfaction. Mitigation involves post-processing LLM outputs with custom fact-checkers.</li>
+</ul>
+<h2 id="security-a-name-security-a-">Security <a name="security"></a></h2>
+<ul>
+<li><a href="https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/">Adversarial Attacks on LLMs</a></li>
+</ul>
+<h2 id="rai-tools">RAI Tools</h2>
+<ul>
+<li><a href="https://github.com/NVIDIA/NeMo-Guardrails">NeMo Guardrails</a>. NeMo Guardrails is an open-source toolkit for easily adding programmable guardrails to LLM-based conversational applications. Guardrails (or &quot;rails&quot; for short) are specific ways of controlling the output of a large language model, such as not talking about politics, responding in a particular way to specific user requests, following a predefined dialog path, using a particular language style, extracting structured data, and more.</li>
+<li><a href="https://www.johnsnowlabs.com/langtest/">LangTest</a>. LangTest: Deliver Safe and Effective Language Models. 
+Simple, Generate &amp; run over 60 test types on the most popular NLP frameworks &amp; tasks with 1 line of code 
+Comprehensive, Test all aspects of model quality - robustness, bias, fairness, representation and accuracy - before going to production
+100% Open Source, The full code base is open under the Apache 2.0 license, designed for easy extension and AI community collaboration</li>
+<li><a href="https://docs.ragas.io/en/stable/">Ragas</a>. Ragas is a framework that helps you evaluate your Retrieval Augmented Generation (RAG) pipelines. RAG denotes a class of LLM applications that use external data to augment the LLM’s context. There are existing tools and frameworks that help you build these pipelines but evaluating it and quantifying your pipeline performance can be hard. This is where Ragas (RAG Assessment) comes in.</li>
+</ul>
+<h1 id="genai-for-the-harm">GenAI for the harm</h1>
+<ul>
+<li><a href="https://arxiv.org/pdf/2406.13843">Generative AI Misuse: A Taxonomy of Tactics and Insights from Real-World Data</a></li>
+</ul>
+<h1 id="sources">Sources</h1>
+<ul>
+<li><a href="https://towardsdatascience.com/bias-toxicity-and-jailbreaking-large-language-models-llms-37cd71a3048f">Bias, Toxicity, and Jailbreaking Large Language Models (LLMs)</a></li>
+<li><a href="https://medium.com/@nayan.j.paul/how-i-designed-a-simple-responsible-ai-solution-for-llms-large-language-models-5c8acf649ea">How I Designed a Simple Responsible AI Solution for LLMs (Large Language Models)</a></li>
+</ul>

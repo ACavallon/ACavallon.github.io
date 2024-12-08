@@ -1,0 +1,226 @@
+<p>-This page is part of the <a href="RAI_landing_page.html"> Responsible AI </a> series.</p>
+<h1 id="index">Index</h1>
+<ol>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#interpretability">Interpretability, Explainability, Transparency</a><ul>
+<li><a href="#interpretability_intro">Why interpretability is important</a></li>
+<li><a href="#interpretability_noneed">When we don't need interpretability</a></li>
+<li><a href="#interpretability_achieved">How interpretability is achieved</a><ul>
+<li><a href="#interpretability_explainability">Interpretability vs Explainability</a></li>
+<li><a href="#interpretability_transparency">Transparency as interpretability</a></li>
+<li><a href="#interpretability_posthoc">Post-hoc interpretability</a></li>
+<li><a href="#interpretability_delivers">Deliverables of interpretation methods</a></li>
+<li><a href="#interpretability_other_method">Other differences between interpretability methods</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#applications">Applications</a><ul>
+<li><a href="#solution_interpretability">Interpretability solutions</a></li>
+<li><a href="#solution_posthoc">Post-hoc Explainability solutions</a><ul>
+<li><a href="#shap">SHAP</a></li>
+</ul>
+</li>
+<li><a href="#solution_mixed">Mixed solutions</a><ul>
+<li><a href="#solution_interpretml">InterpretML</a></li>
+</ul>
+</li>
+<li><a href="#solution_llm">Transparency for LLMs</a></li>
+</ul>
+</li>
+<li><a href="#further_readings">Further readings</a></li>
+</ol>
+<h1 id="introduction-a-id-introduction-a-">Introduction <a id="introduction"></a></h1>
+<h1 id="interpretability-explainability-transparency-a-id-interpretability-a-">Interpretability, Explainability, Transparency <a id="interpretability"></a></h1>
+<h2 id="definition-of-transparency">Definition of Transparency</h2>
+<p>Transparency can be a vague term that can be difficult to measure. How might one determine if an algorithmic system is transparent enough? Would dumping large files of data, source code, and documentation onto the public make a system transparent? Maybe, but this type of transparency is not meaningful to the general public as the documentation may not be directly relevant or comprehensible. Data dumps can also lead to information overload as one might not know where to start to understand how they are impacted by the system. We should argue instead for the promotion of <em>meaningful transparency</em>.
+<strong><em>Meaningful transparency</em></strong>  <strong>is driven by stakeholder information needs. It means delivering the information pertinent to each stakeholder group in the format that is best suited for their understanding.</strong>
+From a societal viewpoint, there are three levels of meaningful algorithmic transparency:</p>
+<ul>
+<li><strong>Level 0: Visibility Baseline.</strong> This might include basic information on the existence of the system, its scope and owner.</li>
+<li><strong>Level 1: Process Visibility.</strong> This includes disclosures about the system’s design and the processes that govern it. This information is helpful to assess the system’s implementation of responsible use safeguards.</li>
+<li><strong>Level 2: Outcome Visibility.</strong> This includes disclosures related to the outcomes that the system produces. This information should be assessed to understand the system’s compliance with Responsible Use principles: fairness, explainability, security, safety, robustness, and privacy.
+<img src=":/fc7c3540961347a8984f9b13a0bd74c5" alt="e03c1f6bb8d2afe41e6553ab914d7369.png"></li>
+</ul>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="https://towardsdatascience.com/fighting-back-on-algorithmic-opacity-30a0c13f0224">Fighting Back on Algorithmic Opacity</a></li>
+</ul>
+<h2 id="definition-of-interpretability">Definition of Interpretability</h2>
+<p>There is no mathematical definition of interpretability. A (non-mathematical) definition written by Miller (2017) is: &quot;Interpretability is the degree to which a human can understand the cause of a decision&quot;. Another one is: &quot;Interpretability is the degree to which a human can consistently predict the model’s result&quot;. The higher the interpretability of a machine learning model, the easier it is for someone to comprehend why certain decisions or predictions have been made. A model is better interpretable than another model if its decisions are easier for a human to comprehend than decisions from the other model.</p>
+<h2 id="why-interpretability-is-important-a-id-interpretability_intro-a-">Why interpretability is important <a id="interpretability_intro"></a></h2>
+<ul>
+<li>Interpretability in machine learning is useful because it can aid in <strong>trust</strong>. As humans, we may be reluctant to rely on machine learning models for certain critical tasks, e.g., medical diagnosis, unless we know &quot;how they work.&quot; </li>
+<li><strong>Safety</strong>. There is almost always some shift in distributions between model training and deployment. Failures to generalize or phenomena like Goodhart&#39;s Law, such as specification gaming, are open problems that could lead to issues in the near future. Approaches to interpretability, which explain the model&#39;s representations or which features are most relevant, could help diagnose these issues earlier and provide more opportunities to remedy the situation.</li>
+<li>Third, and perhaps most interestingly, <strong>contestability</strong>. As we delegate more decision-making to ML models, it becomes important for the people to appeal these decisions. Black-box models provide no such recourse because they don&#39;t decompose the decision into anything contestable. </li>
+</ul>
+<h2 id="when-we-don-t-need-interpretability-a-id-interpretability_noneed-a-">When we don&#39;t need interpretability <a id="interpretability_noneed"></a></h2>
+<ul>
+<li>Interpretability is not required if the model has no significant impact, socially or financially.</li>
+<li>Interpretability is not required when the problem is well studied (e.g. optical character recognition).</li>
+<li>Interpretability might enable people or programs to manipulate the system. Problems with users who deceive a system result from a mismatch between the goals of the creator and the user of a model. Credit scoring is such a system because banks want to ensure that loans are only given to applicants who are likely to return them, and applicants aim to get the loan even if the bank does not want to give them one. This mismatch between the goals introduces incentives for applicants to game the system to increase their chances of getting a loan. If an applicant knows that having more than two credit cards negatively affects his score, he simply returns his third credit card to improve his score, and organizes a new card after the loan has been approved. While his score improved, the actual probability of repaying the loan remained unchanged. The system can only be gamed if the inputs are proxies for a causal feature, but do not actually cause the outcome. Whenever possible, proxy features should be avoided as they make models gameable.</li>
+</ul>
+<h2 id="how-interpretability-is-achieved-a-id-interpretability_achieved-a-">How interpretability is achieved <a id="interpretability_achieved"></a></h2>
+<h3 id="interpretability-vs-explainability-a-id-interpretability_explainability-a-">Interpretability vs Explainability <a id="interpretability_explainability"></a></h3>
+<p>A model is <strong>interpretable</strong> if it is capable of being understood by humans on its own. One can look at the model parameters or a model summary and understand exactly how a prediction was made. Another term for these types of models is an intrinsically interpretable model. An example of interpretable model is a decision tree: to understand how a prediction was made, one simply has to traverse down the nodes of the tree. Intepretable models are also referred to as <strong>White Box</strong>.
+The <strong>explainable</strong> models on the other hand are black-box, functions with inputs and outputs too complicated for humans to understand, that require additional method/technique to be able to understand how the model works. 
+A black box model is a system that does not reveal its internal mechanisms. In machine learning, “black box” describes models that cannot be understood by looking at their parameters (e.g. a neural network).
+In general, this classification based on human comprehension has no formal way to easily discriminate, and the goal of interpretation can be achieved independently from this classification, based only on the type of model and the questions we seek to answer.
+Please note that <strong>Model-agnostic methods</strong> for interpretability treat machine learning models as black boxes, even if they are not.</p>
+<h3 id="transparency-as-interpretability-a-id-interpretability_transparency-a-">Transparency as interpretability <a id="interpretability_transparency"></a></h3>
+<p>Lipton et al. define &quot;transparency as interpretability&quot; as the model&#39;s properties that are useful to understand and can be known before the training begins. In this case, model are instrinsicly interpretable.</p>
+<ul>
+<li><strong><em>Simulatibility</em></strong>: <strong>Can a human walk through the model&#39;s steps?</strong> This property addresses whether or not a human could go through each step of the algorithm and check if each step is reasonable to them. Linear models and decision trees are often cited as interpretable models using such justifications.</li>
+<li><strong><em>Decomposability</em></strong>: <strong>Is the model interpretable at every step or with regards to its sub-components?</strong> This property addresses whether or not a human could understand what the model is doing at each step. For example, in a decision tree whose nodes correspond to easily identifiable factors like age or height, the model&#39;s prediction can be interpreted in terms of what decisions are taken at different nodes of the tree. In general, such a detailed analysis (of decisions taken by the model per-timestep) is difficult because the model&#39;s performance is very tightly coupled with the representations used (i.e. raw features). </li>
+<li><strong><em>Algorithmic Transparency</em></strong>: <strong>Does the algorithm confer any guarantees?</strong> This question asks if our learning algorithm has any desirable properties which are easy to understand. For example, we might know that the algorithm only outputs sparse models, or perhaps it always converges to a specific type of solution. In these cases, the resulting learned model can be more amenable to analysis. On the contrary, deep learning do not allow a direct analogy to the notion of some unique set of weights that perform well on the task at hand.</li>
+</ul>
+<h3 id="post-hoc-interpretability-a-id-interpretability_posthoc-a-">Post-hoc interpretability <a id="interpretability_posthoc"></a></h3>
+<p>Lipton et al. define &quot;post-hoc interpretability&quot; as the things we can learn from the model after training has finished.</p>
+<ul>
+<li><strong><em>Text Explanation</em></strong>: <strong>Can the model explain its decision in natural language, after the fact?</strong> Like how humans can provide post-hoc justifications for their actions, it could be informative to have models that can also explain, probably as natural language statements.</li>
+<li><strong><em>Visualization/Local Explanations</em></strong>: <strong>Can the model identify what is important to its decision-making?</strong> This question focuses on how the inputs and outputs change relate to one another. 
+Saliency maps are a broad class of approaches that look at how a change in the input (or parts of the input) changes the output. A straightforward way to do this is to take the derivative of the loss function with respect to the input. Beyond this simplistic approach, many modifications involve averaging the gradient, perturbing the input, or local approximations. </li>
+<li><strong><em>Explanation by Example</em></strong>: <strong>Can the model show what else in the training data it thinks are related to this input/output?</strong> This question asks for what other training examples are similar to the current input. This is probably less important for understanding what the model is doing.</li>
+</ul>
+<h3 id="deliverables-of-interpretation-methods-a-id-interpretability_delivers-a-">Deliverables of interpretation methods <a id="interpretability_delivers"></a></h3>
+<ul>
+<li><strong>Feature summary statistic</strong>: Many interpretation methods provide summary statistics for each feature. Some methods return a single number per feature, such as feature importance, or a more complex result, such as the pairwise feature interaction strengths, which consist of a number for each feature pair.</li>
+<li><strong>Feature summary visualization</strong>: Most of the feature summary statistics can also be visualized. Some feature summaries are actually only meaningful if they are visualized and a table would be a wrong choice. The partial dependence of a feature is such a case. Partial dependence plots are curves that show a feature and the average predicted outcome. The best way to present partial dependences is to actually draw the curve instead of printing the coordinates.</li>
+<li><strong>Model internals (e.g. learned weights)</strong>: The interpretation of intrinsically interpretable models falls into this category. Examples are the weights in linear models or the learned tree structure (the features and thresholds used for the splits) of decision trees. The lines are blurred between model internals and feature summary statistic in, for example, linear models, because the weights are both model internals and summary statistics for the features at the same time. Another method that outputs model internals is the visualization of feature detectors learned in convolutional neural networks. Interpretability methods that output model internals are by definition model-specific (see next criterion).</li>
+<li><strong>Data point</strong>: This category includes all methods that return data points (already existent or newly created) to make a model interpretable. One method is called counterfactual explanations. To explain the prediction of a data instance, the method finds a similar data point by changing some of the features for which the predicted outcome changes in a relevant way (e.g. a flip in the predicted class). Another example is the identification of prototypes of predicted classes. To be useful, interpretation methods that output new data points require that the data points themselves can be interpreted. This works well for images and texts, but is less useful for tabular data with hundreds of features.</li>
+<li><strong>Intrinsically interpretable model</strong>: One solution to interpreting black box models is to approximate them (either globally or locally) with an interpretable model. The interpretable model itself is interpreted by looking at internal model parameters or feature summary statistics.</li>
+</ul>
+<h3 id="other-differences-between-interpretability-methods-a-id-interpretability_other_method-a-">Other differences between interpretability methods <a id="interpretability_other_method"></a></h3>
+<ul>
+<li><strong>Model-specific or model-agnostic?</strong> Model-specific interpretation tools are limited to specific model classes. The interpretation of regression weights in a linear model is a model-specific interpretation, since – by definition – the interpretation of intrinsically interpretable models is always modelspecific. Tools that only work for the interpretation of e.g. neural networks are model-specific. Model-agnostic tools can be used on any machine learning model and are applied after the model has been trained (post hoc). These agnostic methods usually work by analyzing feature input and output pairs. By definition, these methods cannot have access to model internals such as weights or structural information.</li>
+<li><strong>Local or global?</strong> Does the interpretation method explain an individual prediction or the entire model behavior? Or is the scope somewhere in between? Read more about the scope criterion in the next section.</li>
+</ul>
+<h3 id="sources-a-id-sources-a-">Sources  <a id="sources"></a></h3>
+<h4 id="papers">Papers</h4>
+<ul>
+<li><a href="https://arxiv.org/pdf/1606.03490.pdf">Lipton et al., &quot;The Mythos of Model Interpretability&quot;</a> [ArXiv]</li>
+<li><a href="https://arxiv.org/pdf/1802.01933.pdf">A Survey Of Methods For Explaining Black Box Models</a> [ArXiv]</li>
+<li><a href="https://arxiv.org/pdf/2004.14545.pdf">Explainable Deep Learning: A Field Guide for the Uninitiated</a> [ArXiv]</li>
+<li><a href="https://www.pnas.org/doi/epdf/10.1073/pnas.1900654116">Definitions, methods, and applications in interpretablemachine learning</a> [PNAS]</li>
+<li><a href="https://arxiv.org/pdf/1905.08883.pdf">Explainable Machine Learning for Scientific Insights and Discoveries</a> [ArXiv]<h4 id="others">Others</h4>
+</li>
+<li><a href="https://towardsdatascience.com/black-box-models-are-actually-more-explainable-than-a-logistic-regression-f263c22795d">Black-Box models are actually more explainable than a Logistic Regression</a></li>
+</ul>
+<h1 id="applications-a-id-applications-a-">Applications <a id="applications"></a></h1>
+<ul>
+<li><a href="https://towardsdatascience.com/if-your-model-isnt-explainable-is-it-really-your-model-ac886419175e">If Your Model Isn’t Explainable, Is It Really <em>Your</em> Model?</a></li>
+</ul>
+<h2 id="interpretability-solutions-a-id-solution_interpretability-a-">Interpretability solutions <a id="solution_interpretability"></a></h2>
+<p>Interpretability solutions are inserted in the specific pages of the algorithms. Here&#39;s the list:</p>
+<ul>
+<li>Linear regression</li>
+<li><a href=":/b56cabad8855491bb44076ed636d6862">logistic regression</a></li>
+<li><a href=":/7888384d0b8d4f879d899e00f5dd4b5c">decision tree</a></li>
+</ul>
+<h3 id="random-forest-a-id-solution_rf-a-">Random Forest <a id="solution_rf"></a></h3>
+<ul>
+<li><a href="https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance.html#sphx-glr-auto-examples-inspection-plot-permutation-importance-py">Permutation Importance vs Random Forest Feature Importance (MDI)</a> </li>
+<li><a href="https://towardsdatascience.com/variable-importance-in-random-forests-20c6690e44e0">Variable Importance in Random Forests</a></li>
+</ul>
+<h2 id="post-hoc-explainability-solutions-a-id-solution_posthoc-a-">Post-hoc Explainability solutions <a id="solution_posthoc"></a></h2>
+<ul>
+<li><a href="https://towardsdatascience.com/gain-trust-in-your-model-and-generate-explanations-with-lime-and-shap-94288694c154">Gain Trust in Your Model and Generate Explanations With LIME and SHAP</a></li>
+<li><a href="https://towardsdatascience.com/8-pitfalls-to-avoid-while-using-model-agnostic-interpretation-techniques-d0fcca544711">7 Pitfalls to avoid while using Model-Agnostic Interpretation Techniques</a><h3 id="shap-a-id-shap-a-">SHAP <a id="shap"></a></h3>
+</li>
+<li><a href="https://www.aidancooper.co.uk/how-shapley-values-work/">How Shapley Values Work</a></li>
+<li><a href="https://towardsdatascience.com/shapley-residuals-measuring-the-limitations-of-shapley-values-for-explainability-d9cdc3582522">Shapley Residuals: Measuring the Limitations of Shapley Values for Explainability</a></li>
+<li><a href="https://github.com/ykwon0407/WeightedSHAP">WeightedSHAP: analyzing and improving Shapley based feature attributions</a></li>
+<li><a href="https://towardsdatascience.com/shap-for-time-series-event-detection-5b4d9d0f96f4">SHAP for Time Series Event Detection</a></li>
+<li><a href="https://www.aidancooper.co.uk/approximating-shapley-values/?utm_source=substack&amp;utm_medium=email">Approximating Shapley Values for Machine Learning</a></li>
+<li><a href="https://towardsdatascience.com/shap-vs-ale-for-feature-interactions-understanding-conflicting-results-ac506149f678">SHAP vs. ALE for Feature Interactions: Understanding Conflicting Results</a></li>
+<li><a href="https://arxiv.org/pdf/2006.16234">True to the Model or True to the Data?</a> [ArXiv]</li>
+</ul>
+<h3 id="others">Others</h3>
+<ul>
+<li><a href="https://github.com/SeldonIO/alibi">Alibi</a> is an Python library aimed at machine learning model inspection and interpretation. The focus of the library is to provide high-quality implementations of black-box, white-box, local and global explanation methods for classification and regression models.</li>
+<li><a href="https://github.com/MAIF/shapash">Shapash</a> is a Python library designed to make machine learning interpretable and comprehensible for everyone. It offers various visualizations with clear and explicit labels that are easily understood by all.</li>
+</ul>
+<h2 id="mixed-solutions-a-id-solution_mixed-a-">Mixed solutions <a id="solution_mixed"></a></h2>
+<h3 id="interpretml-a-id-solution_interpretml-a-">InterpretML <a id="solution_interpretml"></a></h3>
+<ul>
+<li><a href="https://github.com/interpretml/interpret/">InterpretML</a>. InterpretML is an open-source package that incorporates state-of-the-art machine learning interpretability techniques under one roof. With this package, you can train interpretable glassbox models and explain blackbox systems. InterpretML helps you understand your model&#39;s global behavior, or understand the reasons behind individual predictions.</li>
+<li><a href="https://interpret.ml/docs/index.html">InterpretML documentation</a></li>
+<li><a href="https://arxiv.org/pdf/1909.09223.pdf">InterpretML: A Unified Framework for Machine Learning Interpretability</a> [ArXiv]</li>
+<li><a href="https://towardsdatascience.com/interpretml-another-way-to-explain-your-model-b7faf0a384f8">InterpretML: Another Way to Explain Your Model</a></li>
+<li><a href="https://nbviewer.org/github/NogaGershonB/InterpretML-code/blob/main/InterpretML_blog.ipynb">InterpretML notebook demo</a></li>
+</ul>
+<h2 id="transparency-for-llms">Transparency for LLMs</h2>
+<ul>
+<li><a href="https://www.ai-transparency.org/?utm_source=alphasignalai.beehiiv.com&amp;utm_medium=newsletter&amp;utm_campaign=the-3-ai-papers-you-should-read-this-week">Representation Engineering: A Top-Down Approach to AI Transparency</a></li>
+</ul>
+<h1 id="further-readings-a-id-further_readings-a-">Further readings <a id="further_readings"></a></h1>
+<ul>
+<li><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/explaining-decisions-made-with-artificial-intelligence/">Explaining decisions made with AI</a>. This co-badged guidance by the ICO and The Alan Turing Institute aims to give organisations practical advice to help explain the processes, services and decisions delivered or assisted by AI, to the individuals affected by them. </li>
+<li><a href="https://arxiv.org/ftp/arxiv/papers/1804/1804.11192.pdf">Explainable Recommendation: A Survey and New Perspectives</a></li>
+<li><a href="https://arxiv.org/abs/2305.11755">Visualization for Recommendation Explainability: A Survey and New Perspectives</a></li>
+<li><a href="https://towardsdatascience.com/explainability-interpretability-and-observability-in-machine-learning-515a2ac8234a">Explainability, Interpretability and Observability in Machine Learning</a></li>
+<li><a href="https://towardsdatascience.com/sparse-autoencoders-additive-decision-trees-and-other-emerging-topics-in-ai-interpretability-9ab1eaf14d3e">Sparse Autoencoders, Additive Decision Trees, and Other Emerging Topics in AI Interpretability</a></li>
+<li><a href="https://towardsdatascience.com/additive-decision-trees-85f2feda2223">Additive Decision Trees</a></li>
+<li><a href="https://towardsdatascience.com/the-meaning-of-explainability-for-ai-d8ae809c97fa">The Meaning of Explainability for AI</a></li>
+<li><a href="https://mindfulmodeler.substack.com/p/shedding-light-on-impossibility-theorems?utm_source=post-email-title&amp;publication_id=1078760&amp;post_id=145714332&amp;utm_campaign=email-post-title&amp;isFreemail=true&amp;r=25lfp&amp;triedRedirect=true&amp;utm_medium=email">Shedding light on &quot;Impossibility Theorems for Feature Attribution&quot;</a></li>
+</ul>
+<h1 id="to-be-reviewed">TO BE REVIEWED</h1>
+<p>In the context of machine learning and artificial intelligence, explainability and interpretability are often used interchangeably but they have some differences, even if they are very closely related:</p>
+<p><strong><em>Interpretability</em></strong> is about the extent to which a cause and effect can be observed within a system, i.e. the extent to which you are able to predict what is going to happen, given a change in input or algorithmic parameters. It’s being able to look at an algorithm and go yep, I can see what’s happening here.</p>
+<p><strong><em>Explainability</em></strong>, meanwhile, is the extent to which the internal mechanics of a machine or deep learning system can be explained in human terms. It’s easy to miss the subtle difference with interpretability, but consider it like this: interpretability is about being able to discern the mechanics without necessarily knowing why. Explainability is being able to quite literally explain what is happening.</p>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="https://www.kdnuggets.com/2018/12/machine-learning-explainability-interpretability-ai.html">&quot;Machine Learning Explainability vs Interpretability: Two concepts that could help restore trust in AI&quot; [KD nuggets]</a></li>
+</ul>
+<h1 id="explainability-frameworks-for-each-algorithm">Explainability frameworks for each algorithm</h1>
+<h2 id="explainability-for-logistic-regression">Explainability for logistic regression</h2>
+<h2 id="explainability-for-random-forest">Explainability for Random Forest</h2>
+<p>Built-in function in</p>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance.html#sphx-glr-auto-examples-inspection-plot-permutation-importance-py">&quot;Permutation Importance vs Random Forest Feature Importance (MDI)&quot;</a></li>
+</ul>
+<h2 id="explainability-for-xgboost">Explainability for XGBoost</h2>
+<p>XGBoost has built-in explainability methods, based basically on <em>weight</em> (i.e. the frequency of a feature in splitting the trees), <em>cover</em> (i.e. the frequency of a feature in splitting the data across all trees weighted by the number of training data points that go through those splits) or <em>gain</em> (i.e. the average training loss reduction gained when using a feature for splitting).</p>
+<p>Unfortunately, these methods are not always <em>consistent</em> within each other, making difficult to compare feature importance from different models. 
+Therefore, it is advisable for XGBoost to use SHAP value, since it doesn&#39;t present these inconsistency issues.</p>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="https://towardsdatascience.com/interpretable-machine-learning-with-xgboost-9ec80d148d27">&quot;Interpretable Machine Learning with XGBoost&quot;</a></li>
+<li><a href="https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/tree_based_models/Basic%20SHAP%20Interaction%20Value%20Example%20in%20XGBoost.html">&quot;Basic SHAP Interaction Value Example in XGBoost&quot;</a></li>
+<li><a href="https://slundberg.github.io/shap/notebooks/Census%20income%20classification%20with%20XGBoost.html">&quot;Census income classification with XGBoost&quot;</a></li>
+</ul>
+<h2 id="explainability-for-imaging-recognition">Explainability for imaging recognition</h2>
+<ul>
+<li>one for gradcam: model-aware techniques, extracting information from the model, e.g. activation of the inner layers, nice heatmaps created</li>
+<li>perturbation method (e.g. LIME) works on data, introducing small perturbation and see how it reflects on the output</li>
+</ul>
+<h2 id="explainability-for-graph-neural-networks">Explainability for Graph Neural Networks</h2>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="https://github.com/AstraZeneca/awesome-explainable-graph-reasoning">Awesome Explainable Graph Reasoning</a></li>
+</ul>
+<h1 id="explainability-frameworks">Explainability frameworks</h1>
+<h2 id="shap-shapley-additive-explanations-">SHAP (SHapley Additive exPlanations)</h2>
+<p>SHAP values are based on Shapley values, a concept coming from game theory: what Shapley does is quantifying the contribution that each player brings to the game, what SHAP does is quantifying the contribution that each feature brings to the prediction made by the model. A “game” concerns a single observation. Indeed, SHAP is about local interpretability of a predictive model.
+SHAP values are based on the idea that the outcome of each possible combination of feature (= coalition of players) should be considered to determine the importance of a single feature (= player).</p>
+<p><img src="shap_tree.png" alt="Picture 1. Power set with three features."></p>
+<p>In math, this is called a “power set” and can be represented as a tree.
+Each node represents a coalition of features. Each edge represents the inclusion of a feature not present in the previous coalition.</p>
+<p>The cardinality of a power set is 2^n, where n is the number of elements of the original set. Now, SHAP requires to train a distinct predictive model for each distinct coalition in the power set, meaning 2 ^ F models. These models are completely equivalent to each other for what concerns their hyperparameters and their training data, the only thing that changes is the set of features included in the model.</p>
+<p>As seen above, two nodes connected by an edge differ for just one feature, in the sense that the bottom one has exactly the same features of the upper one plus an additional feature that the upper one did not have. Therefore, the gap between the predictions of two connected nodes can be imputed to the effect of that additional feature. This is called “marginal contribution” of a feature.</p>
+<p>Therefore, each edge represents the marginal contribution brought by a feature to a model.</p>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30">&quot;SHAP Values Explained Exactly How You Wished Someone Explained to You&quot;</a></li>
+</ul>
+<hr>
+<h2 id="lime-local-interpretable-model-agnostic-explanations-">LIME (Local Interpretable Model-Agnostic Explanations)</h2>
+<p>LIME is a perturbation method, i.e. it introduces small perturbations in the input and see how they are reflected in the predictions. The perturbation can make sense to humans (e.g., words or parts of an image), even if the model is using more complicated components, making easy the interpretability.</p>
+<h3 id="sources">Sources</h3>
+<ul>
+<li><a href="https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/">&quot;Local Interpretable Model-Agnostic Explanations (LIME): An Introduction&quot;</a></li>
+<li><a href="https://homes.cs.washington.edu/~marcotcr/blog/lime/">&quot;LIME - Local Interpretable Model-Agnostic Explanations&quot;</a></li>
+</ul>
+<h1 id="tools">Tools</h1>

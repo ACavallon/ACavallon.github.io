@@ -1,0 +1,174 @@
+
+<p>This page is an introduction to <strong>responsible AI</strong>, also referred to as <strong>trustworthy AI</strong> or <strong>ethical AI</strong>.</p>
+<h1 id="index">Index</h1>
+<ul>
+<li><a href="#ethics_ai">Ethics in AI</a></li>
+<li><a href="#ai_governance">AI Governance</a></li>
+<li><a href="#model_governance">Model Governance</a><ul>
+<li><a href="#model_reporting">Model Reporting</a></li>
+</ul>
+</li>
+<li><a href="#tools_frameworks">Tools &amp; Framework</a><ul>
+<li><a href="#libraries">Libraries</a></li>
+</ul>
+</li>
+<li><a href="#aiethicist">AI Ethicist</a></li>
+<li><a href="#regulations">Regulations</a><ul>
+<li><a href="#euaiact">EU AI Act</a></li>
+</ul>
+</li>
+<li><a href="#airisk">AI Risk</a></li>
+<li><a href="#resources">Resources</a><ul>
+<li><a href="#handbooks">Handbooks</a></li>
+<li><a href="#institutions">Institutions</a></li>
+<li><a href="#articles">Articles</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="ethics-in-ai-a-name-ethics_ai-a-">Ethics in AI <a name="ethics_ai"></a></h1>
+<p>Ethics in AI refers to the study and application of moral principles and values in the development, deployment, and use of artificial intelligence systems. It involves considering the ethical implications, potential risks, and societal impact of AI technologies.
+Ethics in AI addresses questions and concerns related to the responsible and fair use of AI, including issues such as:</p>
+<ol>
+<li> <a href="RAI_explainability.html"> Transparency &amp; Explainability </a>: Ensuring that AI systems are understandable and can provide explanations for their decisions and actions. This principle is strictly correlated with <a href=":/f42456bafaa54d67bfe8a6e7852060ab">RAI Causality</a>.</li>
+<li><a href="RAI_fairness_bias.html">Fairness and bias</a>: Mitigating biases in AI algorithms and ensuring fairness in the treatment of individuals and groups across different demographics. Also fairness can be improved by using <a href=":/f42456bafaa54d67bfe8a6e7852060ab">RAI Causality</a>.</li>
+<li>Privacy and data protection: Safeguarding personal information and ensuring compliance with privacy regulations in the collection, storage, and use of data.</li>
+<li>Accountability and responsibility: Determining who is accountable for the actions and consequences of AI systems, especially in cases of harm or unintended consequences.</li>
+<li>Human control and autonomy: Striving to maintain human control over AI systems and preventing them from unduly influencing or replacing human decision-making.</li>
+<li>Social impact and inclusivity: Assessing the impact of AI on society, employment, and marginalized communities, and striving for inclusivity and benefit for all.</li>
+<li>Safety and risk management: Addressing the potential risks and challenges associated with AI technologies, including cybersecurity, algorithmic failures, and unintended consequences.</li>
+</ol>
+<p>Ethics in AI aims to ensure that AI is developed and deployed in a responsible and ethical manner, aligning with societal values and protecting human rights. It involves interdisciplinary collaboration between technologists, ethicists, policymakers, and other stakeholders to establish guidelines, standards, and regulations for the ethical use of AI.</p>
+<p>Another important principle is <strong>trust</strong>, but it&#39;s not clear how to define it.</p>
+<ul>
+<li><a href="https://mikaelapisani.medium.com/responsible-ai-building-trust-through-ethical-practices-db64ad6840bd">Responsible AI: Building Trust Through Ethical Practices</a></li>
+</ul>
+
+<h1 id="ai-governance-a-name-ai_governance-a-">AI Governance <a name="ai_governance"></a></h1>
+<ul>
+<li><a href="https://aistandardshub.org/ai-standards-search/">Standards Database</a>. Find information on AI-related standards using the search and filtering capabilities below. This database currently covers nearly 300 relevant standards that are being developed or have been published by a range of prominent Standards Development Organisations.</li>
+</ul>
+<h3 id="scouting">Scouting</h3>
+<ul>
+<li><a href="https://www.eaidb.org/map">The FY2024 Map</a>. The Responsible AI Ecosystem. Tracking 300 responsible AI enabling startups.
+-<a href="https://www.fiddler.ai/">fiddler.ai</a>. Enterprise AI Observability. Build trust into AI for MLOps</li>
+<li><a href="https://www.splunk.com/">splunk</a></li>
+</ul>
+<h3 id="training">Training</h3>
+<ul>
+<li><a href="https://academy.aitechprivacy.com/ai-governance-trainingl">AI Governance Training</a></li>
+</ul>
+<h1 id="model-governance-a-name-model_governance-a-">Model Governance <a name="model_governance"></a></h1>
+<ul>
+<li><a href="https://github.com/visenger/Awesome-ML-Model-Governance">Awesome ML Model Governance</a> [GitHub]</li>
+</ul>
+<h2 id="model-reporting-a-name-model_reporting-a-">Model Reporting <a name="model_reporting"></a></h2>
+<p>Main instruments to report machine learning “artifacts”:</p>
+<ul>
+<li>Use <strong>Model Cards</strong> to report on your model. Used by HuggingFace and many others, they are already quite established. Model cards allow others to understand and re-use your model. [<a href="https://huggingface.co/docs/hub/en/model-cards?utm_source=substack&amp;utm_medium=email">HuggingFace Model card</a>] [ArxiV paper <a href="https://arxiv.org/pdf/1810.03993">Model Cards for Model Reporting</a>]</li>
+<li><strong>DataSheets for Datasets</strong> is a reporting approach for datasets. Datasheets are a checklist that guides you through all relevant questions, such as motivation to create the data, composition, collection process, and so on.</li>
+<li>Use the <strong>REFORMS</strong> checklist if you report on your research based on machine learning. Typically when writing a paper. REFORMS is agnostic to the field of application, so it’s a rather broad checklist.</li>
+</ul>
+<p>For more “special cases”:</p>
+<ul>
+<li>Writing a paper on a clinical prediction model? Use the <strong>TRIPOD+AI</strong> checklist.</li>
+<li>For writing a paper on medical imaging, you can use <strong>CLAIM</strong>, a checklist for artificial intelligence in medical imaging.</li>
+</ul>
+<h1 id="responsible-ai-for-generative-ai">Responsible AI for Generative AI</h1>
+<ul>
+<li><a href="https://arxiv.org/ftp/arxiv/papers/2311/2311.02107.pdf">Generative Artificial Intelligence in Healthcare: Ethical Considerations and Assessment Checklist</a> [ArXiv]</li>
+</ul>
+<h1 id="risk">Risk</h1>
+<ul>
+<li><a href="https://atlas.mitre.org/">ATLAS</a>. ATLAS (Adversarial Threat Landscape for Artificial-Intelligence Systems) is a globally accessible, living knowledge base of adversary tactics and techniques against Al-enabled systems based on real-world attack observations and realistic demonstrations from Al red teams and security groups.</li>
+</ul>
+<h1 id="classification-of-ai-solution-ai-scenario-">Classification of AI Solution (AI Scenario)</h1>
+<ul>
+<li><a href="https://www.oecd-ilibrary.org/science-and-technology/oecd-framework-for-the-classification-of-ai-systems_cb6d9eca-en;jsessionid=02KNatRhiqFtc2HV6xhz1V-N9o4-eF0H-juzNFru.ip-10-240-5-165">OECD Framework for the Classification of AI systems</a> [2022]</li>
+</ul>
+<h1 id="tools-framework-a-name-tools_frameworks-a-">Tools &amp; Framework <a name="tools_frameworks"></a></h1>
+<h2 id="libraries-a-name-libraries-a-">Libraries <a name="libraries"></a></h2>
+<ul>
+<li><a href="https://www.microsoft.com/en-us/haxtoolkit/library/?content_type%5B3%5D=guideline">HAX Toolkit</a> from Microsoft. The Human-AI Experience (HAX) Toolkit is a set of hands-on tools that help AI builders from any discipline to work together as they plan and create AI systems that people interact with.</li>
+<li><a href="https://github.com/OWASP/www-project-ai-security-and-privacy-guide/blob/main/owaspaiexchange.md">OWASP AI Exchange</a>. The OWASP AI Exchange is as an open source collaborative document to advance the development of global AI security standards and regulations. It provides a comprehensive overview of AI threats, vulnerabilities, and controls to foster alignment among different standardization initiatives. This includes the EU AI act, ISO/IEC 27090 (AI security), the OWASP ML top 10, the OWASP LLM top 10, and OpenCRE - which we want to use to provide the AI Exchange content through the security chatbot OpenCRE-Chat.</li>
+<li><a href="https://altai.insight-centre.org/">The Assessment List for Trustworthy Artificial Intelligence</a></li>
+<li><a href="https://www.bestpractice.ai/ai-reports-toolkits">Best Practice AI</a></li>
+<li><a href="https://www.giskard.ai/?utm_campaign=The%20Batch&amp;utm_source=hs_email&amp;utm_medium=email&amp;utm_content=284568788">Giskard</a>. The testing framework for ML models</li>
+<li><a href="https://github.com/Telefonica/XAIoGraphs">XAIoGraphs</a>. XAIoGraphs (eXplainability Articicial Intelligence over Graphs) is an Explicability and Fairness Python library for classification problems with tabulated and discretized data. The explainability methods in this library don&#39;t make any hypotheses about the data, so it does not require the AI model. Simply need data and predictions (or decisions), being able to explain AI models, rule models, and reality.</li>
+<li><a href="https://github.com/py-why/dowhy">DoWhy</a>. DoWhy provides a wide variety of algorithms for effect estimation, prediction, quantification of causal influences, diagnosis of causal structures, root cause analysis, interventions and counterfactuals. A key feature of DoWhy is its refutation and falsification API that can test causal assumptions for any estimation method, thus making inference more robust and accessible to non-experts.</li>
+</ul>
+<h2 id="microsoft">Microsoft</h2>
+<h3 id="resources-on-responsible-ai">Resources on Responsible AI</h3>
+<ul>
+<li><a href="https://www.microsoft.com/en-us/ai/principles-and-approach/">Principles and approach</a></li>
+<li><a href="https://www.microsoft.com/en-us/ai/responsible-ai?rtc=1&amp;activetab=pivot1:primaryr6">Empowering responsible AI practices</a><h3 id="azure-s-responsible-ai-dashboard">Azure&#39;s Responsible AI Dashboard</h3>
+</li>
+<li><a href="https://techcommunity.microsoft.com/t5/ai-machine-learning-blog/how-to-perform-error-analysis-on-a-model-with-the-responsible-ai/ba-p/3775442?WT.mc_id=aiml-71289-ruyakubu">How to perform Error Analysis on a model with the Responsible AI dashboard (Part 4)</a><h3 id="packages">Packages</h3>
+</li>
+<li><a href="https://github.com/microsoft/responsible-ai-toolbox">Responsible AI Toolbox</a></li>
+</ul>
+<h1 id="the-work-of-rai-practitioner">The work of RAI practitioner</h1>
+<ul>
+<li><a href="https://dl.acm.org/doi/fullHtml/10.1145/3600211.3604702#:~:text=The%20so%2Dcalled%20responsible%20Artificial,safe%20design%20of%20AI%20systems.">What does it mean to be a responsible AI practitioner: An ontology of roles and skills</a></li>
+</ul>
+<h1 id="ai-ethicist-a-name-aiethicist-a-">AI Ethicist <a name="aiethicist"></a></h1>
+<ul>
+	<li><a href="https://hophr.com/hire-guides/how-to-hire-ai-ethicist">https://hophr.com/hire-guides/how-to-hire-ai-ethicist</a></li>
+	<li><a href="https://builtin.com/artificial-intelligence/ai-ethics">https://builtin.com/artificial-intelligence/ai-ethics</a></li>
+	<li><a href="https://aiethicsinitiative.org/">https://aiethicsinitiative.org/</a></li>
+	<li><a href="https://www.bcs.org/articles-opinion-and-research/what-are-ethics-in-ai/">https://www.bcs.org/articles-opinion-and-research/what-are-ethics-in-ai/</a></li>
+	<li><a href="https://www.ericsson.com/en/reports-and-papers/industrylab/reports/ai-ethics">https://www.ericsson.com/en/reports-and-papers/industrylab/reports/ai-ethics</a></li>
+	<li><a href="https://www.techtarget.com/whatis/definition/AI-code-of-ethics">https://www.techtarget.com/whatis/definition/AI-code-of-ethics</a></li>
+	<li><a href="https://medium.com/@MerveHickok/what-does-an-ai-ethicist-do-a-guide-for-the-why-the-what-and-the-how-643e1bfab2e9">https://medium.com/@MerveHickok/what-does-an-ai-ethicist-do-a-guide-for-the-why-the-what-and-the-how-643e1bfab2e9</a></li>
+	<li><a href="https://www.aiethicsjournal.org/">https://www.aiethicsjournal.org/</a></li>
+	<li><a href="https://www.ai-ethicist.com/">https://www.ai-ethicist.com/</a></li>
+	<li><a href="https://h2o.ai/wiki/ai-ethics/">https://h2o.ai/wiki/ai-ethics/</a></li>
+	<li><a href="https://www.analyticsinsight.net/artificial-intelligence/what-does-an-ai-ethicist-do">https://www.analyticsinsight.net/artificial-intelligence/what-does-an-ai-ethicist-do</a></li>
+	<li><a href="https://mitpress.mit.edu/9780262538190/ai-ethics/">https://mitpress.mit.edu/9780262538190/ai-ethics/</a></li>
+	<li><a href="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai">https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai</a></li>
+	<li><a href="https://www.businessinsider.com/what-is-ai-ethicist-working-to-make-the-tech-safe-2023-5">https://www.businessinsider.com/what-is-ai-ethicist-working-to-make-the-tech-safe-2023-5</a></li>
+	<li><a href="https://www.ibm.com/it-it/impact/ai-ethics">https://www.ibm.com/it-it/impact/ai-ethics</a></li>
+	<li><a href="https://sloanreview.mit.edu/article/what-does-an-ai-ethicist-do/">https://sloanreview.mit.edu/article/what-does-an-ai-ethicist-do/</a></li>
+	<li><a href="https://www.ibm.com/topics/ai-ethics">https://www.ibm.com/topics/ai-ethics</a></li>
+	<li><a href="https://www.tealhq.com/education/ai-ethics-specialist">https://www.tealhq.com/education/ai-ethics-specialist</a></li>
+	<li><a href="https://en.wikipedia.org/wiki/Ethics_of_artificial_intelligence">https://en.wikipedia.org/wiki/Ethics_of_artificial_intelligence</a></li>
+	<li><a href="https://www.linkedin.com/pulse/why-ai-ethics-next-big-thing-look-future-career-rick-spair--oocxe/">https://www.linkedin.com/pulse/why-ai-ethics-next-big-thing-look-future-career-rick-spair--oocxe/</a></li>
+	<li><a href="https://www.upwork.com/resources/ai-ethicists-importance-role-and-how-to-become-one">https://www.upwork.com/resources/ai-ethicists-importance-role-and-how-to-become-one</a></li>
+	<li><a href="https://www.tealhq.com/how-to-become/ai-ethics-specialist">https://www.tealhq.com/how-to-become/ai-ethics-specialist</a></li>
+	<li><a href="https://www.linkedin.com/pulse/how-become-artificial-intelligence-ai-ethicist-rasadari-abeysinghe/">https://www.linkedin.com/pulse/how-become-artificial-intelligence-ai-ethicist-rasadari-abeysinghe/</a></li>
+	<li><a href="https://www.dexai.eu/">https://www.dexai.eu/</a></li>
+	<li><a href="https://www.dexai.eu/ai-ethics-officer-la-professione-del-futuro-nel-campo-dell-intelligenza-artificiale">https://www.dexai.eu/ai-ethics-officer-la-professione-del-futuro-nel-campo-dell-intelligenza-artificiale</a></li>
+	<li><a href="https://www.infodata.ilsole24ore.com/2022/08/04/mestiere-del-global-leader-ai-ethics-spiegato-bene-si-progetta-lintelligenza-artificiale-2/">https://www.infodata.ilsole24ore.com/2022/08/04/mestiere-del-global-leader-ai-ethics-spiegato-bene-si-progetta-lintelligenza-artificiale-2/</a></li>
+	<li><a href="https://www2.deloitte.com/us/en/pages/consulting/articles/ai-ethicist-and-ai-bias.html">https://www2.deloitte.com/us/en/pages/consulting/articles/ai-ethicist-and-ai-bias.html</a></li>
+	<li><a href="https://ethicists.ai/">https://ethicists.ai/</a></li>
+	<li><a href="https://www.aiethicist.org/">https://www.aiethicist.org/</a></li>
+	<li><a href="https://onlinedegrees.sandiego.edu/ai-ethicist-career/">https://onlinedegrees.sandiego.edu/ai-ethicist-career/</a></li>
+</ul>
+<h1 id="regulations-a-name-regulations-a-">Regulations <a name="regulations"></a></h1>
+<h2 id="eu-ai-act-a-name-euaiact-a-">EU AI Act <a name="euaiact"></a></h2>
+<p>You can find infos here <a href=":/698e922749a04d35802be034191e5fbd">AI law and regulations</a>.</p>
+<h1 id="ai-risk-a-name-airisk-a-">AI Risk <a name="airisk"></a></h1>
+<h2 id="ai-risk-repository">AI Risk repository</h2>
+<ul>
+<li><a href="https://airisk.mit.edu/">AI Risk Repository</a>. The AI Risk Repository has three parts:<ul>
+<li>The AI Risk Database captures 700+ risks extracted from 43 existing frameworks, with quotes and page numbers.</li>
+<li>The Causal Taxonomy of AI Risks classifies how, when, and why these risks occur.</li>
+<li>The Domain Taxonomy of AI Risks classifies these risks into seven domains (e.g., “Misinformation”) and 23 subdomains (e.g., “False or misleading information”).
+&quot;The AI Risk Repository: A Comprehensive Meta-Review, Database, and Taxonomy of Risks From Artificial Intelligence&quot; <a href="https://media.licdn.com/dms/document/media/D561FAQFnpVOmWH8UsQ/feedshare-document-pdf-analyzed/0/1723756725625?e=1724889600&amp;v=beta&amp;t=aZWcIrKgTnBta-jXrEbUxayL0SpU5DkNzoGkjF5ErOw">[paper]</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="resources-a-name-resources-a-">Resources <a name="resources"></a></h1>
+<p>In this section, all the sources for further information are gathered.</p>
+<h2 id="handbooks-a-name-handbooks-a-">Handbooks <a name="handbooks"></a></h2>
+<ul>
+<li><a href="https://www.amazon.it/Responsible-Ai-Implement-Approach-Organization/dp/1398615706">Responsible AI: Implement an Ethical Approach in your Organization</a> - Olivia Gambelin</li>
+</ul>
+<h2 id="institutions-a-name-institutions-a-">Institutions <a name="institutions"></a></h2>
+<ul>
+<li><a href="https://www.responsible.ai/who-we-are/">The Responsible AI Institute</a>. The Responsible AI Institute (RAI Institute) is a global and member-driven non-profit dedicated to enabling successful responsible AI efforts in organizations. The RAI Institute’s conformity assessments and certifications for AI systems support practitioners as they navigate the complex landscape of creating, selling or buying AI products. Through our global network of responsible AI experts, the RAI Institute offers valuable insights to practitioners, policymakers, and regulators to enable technologies that improve the social and economic well-being of society.</li>
+<li><a href="https://futurium.ec.europa.eu/en/european-ai-alliance/pages/welcome-altai-portal">European AI Alliance - ALTAI portal</a>. The Assessment List for Trustworthy Artificial Intelligence (ALTAI), is a practical tool that helps business and organisations to self-assess the trustworthiness of their AI systems under development.</li>
+</ul>
+<h2 id="articles-a-name-articles-a-">Articles <a name="articles"></a></h2>
+<ul>
+<li><a href="https://www.fast.ai/posts/2023-07-29-ai-centralizes-power/?utm_source=substack&amp;utm_medium=email">AI and Power: The Ethical Challenges of Automation, Centralization, and Scale</a></li>
+</ul>
